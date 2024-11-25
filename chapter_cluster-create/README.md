@@ -25,7 +25,7 @@ Cilium CLIはCiliumが動作しているKubernetesクラスターの管理やト
 HelmはKubernetes用のパッケージマネージャーであり、Helmfileを使用することで複数のHelmチャートを宣言的に管理できます。
 各ツールの詳細については上記リンクをご参照ください。
 
-上記のツールは`install-tools.sh`を実行することでインストールされます。
+上記のツールは`install-tools.sh`を実行することでインストールされます(今回のハンズオン環境ではすでに実行済みです。)。
 
 ```shell
 ./install-tools.sh
@@ -37,7 +37,7 @@ HelmはKubernetes用のパッケージマネージャーであり、Helmfileを�
 > [!WARNING]
 >
 > [Known Issue#Pod errors due to "too many open files"](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files)に記載があるように、kindではホストのinotifyリソースが不足しているとエラーが発生します。
-> ハンズオン環境ではinotifyリソースが不足しているため、sysctlを利用してカーネルパラメータを修正する必要があります。
+> ハンズオン環境ではinotifyリソースが不足しているため、sysctlを利用してカーネルパラメータを修正する必要があります（今回のハンズオン環境では実行済みです）。
 > ```shell
 > sudo sysctl fs.inotify.max_user_watches=524288
 > sudo sysctl fs.inotify.max_user_instances=512
@@ -192,10 +192,10 @@ service/handson   ClusterIP   10.96.82.202   <none>        8080/TCP   3m33s
 NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/handson-blue   1/1     1            1           3m34s
 
-NAME                                             CLASS   HOSTS             ADDRESS       PORTS   AGE
-ingress.networking.k8s.io/app-ingress-by-nginx   nginx   app.example.com   10.96.54.28   80      3m9s
+NAME                                             CLASS   HOSTS                                 ADDRESS       PORTS   AGE
+ingress.networking.k8s.io/app-ingress-by-nginx   nginx   app.vmXX.handson.cloudnativedays.jp   10.96.54.28   80      3m9s
 ```
 
-ブラウザから`http://app.example.com`に接続し、下記のような画面が表示されることを確認してください。
+ブラウザから`http://app.vmXX.handson.cloudnativedays.jp`に接続し、下記のような画面が表示されることを確認してください。
 
 ![](./image/app-simple-routing.png)
